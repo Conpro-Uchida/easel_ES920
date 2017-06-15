@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	char cSend[512] = "1234567890abcdefghijklmnopqrstuvwxyz";
 	char cMsg[512] = {0};
 	unsigned char cRecv[50] = {0};
-	int i = 1;
+	//int i = 1;
 	int ret = 0;
 	int sig = 0;
 	int cnt = 1;
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 
 	// CheckSum
 	int iChksum = 0;
-	int cMsgSize = 0;
+	//int cMsgSize = 0;
 
 	BYTE multi64bitAddr[8]={0};
 
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
 	//	strcpy( DevName1, argv[1] );
 
 		if( argc >= 2 ){
-
+			int i = 1;
 			// 引数解析
 			while(i < argc){
 				printf("[%d] %s\n", i, argv[i]);
@@ -276,7 +276,7 @@ int main(int argc, char **argv)
 					}
 
 					if(strncmp(argv[i], "-qcnt=", strlen("-qcnt=")) == 0){
-						if(sscanf(argv[i], "-qcnt=%d", &qcnt) != 1){
+						if(sscanf(argv[i], "-qcnt=%u", &qcnt) != 1){
 							ret = -1;
 						}
 					}
@@ -469,13 +469,14 @@ int main(int argc, char **argv)
 	}*/
 
 	// 初回の受信側の準備待ち
-	int count = 0;
+	unsigned int count = 0;
 	
 	while(sig_cnt == 0){
-
+		int cMsgSize = 0;
+		
 		sleep(1);
 
-		printf("Current count = %d, Set count = %d\n", count,qcnt);
+		printf("Current count = %u, Set count = %u\n", count,qcnt);
 
 		if(count == qcnt)
 		{

@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	char DevName1[26] = "/dev/ttyO3";
 	char cMsg[512] = "1234567890abcdefghijklmnopqrstuvwxyz";
 	unsigned char cRecv[50] = {0};
-	int i = 1;
+	//int i = 1;
 	int ret = 0;
 	int sig = 0;
 	int cnt = 1;
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
 	//	strcpy( DevName1, argv[1] );
 
 		if( argc >= 2 ){
-
+			int i = 1;
 			// 引数解析
 			while(i < argc){
 				printf("[%d] %s\n", i, argv[i]);
@@ -277,7 +277,7 @@ int main(int argc, char **argv)
 					}
 
 					if(strncmp(argv[i], "-qcnt=", strlen("-qcnt=")) == 0){
-						if(sscanf(argv[i], "-qcnt=%d", &qcnt) != 1){
+						if(sscanf(argv[i], "-qcnt=%u", &qcnt) != 1){
 							ret = -1;
 						}
 					}
@@ -519,7 +519,7 @@ int main(int argc, char **argv)
 	//sleep(10);
 
 	printf("----- ES920LR RESULT ------\n");
-	printf("OK CNT=%d, TOTAL CNT=%d\n",ok_cnt,qcnt);
+	printf("OK CNT=%d, TOTAL CNT=%u\n",ok_cnt,qcnt);
 	printf("---------------------------\n");
 
 	easel_ES920_exit();
@@ -549,7 +549,7 @@ int easel_ES920_csv_write(char *fdate, short rx_pwr, char *data, char ret[], int
 	char date[64];
 	char *fpwd = "/home/conprosys/niimi/ES920_Recv/";
 	char fch[2];
-	char fbw[2];
+	char fbw[4];
 	char fsf[2];
 	sprintf(fch,"%d",qch);
 	sprintf(fsf,"%d",qsf);
