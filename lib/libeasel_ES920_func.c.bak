@@ -422,14 +422,13 @@ int _easel_es920_send_recv(char buf[], int command )
 	usleep(param.SerialWait);
 
 	iRet = RecvCommandAck();
-	if( iRet < 0 )	return iRet;
-
-	if( buf != (char*) NULL ){
-		if( strcmp( buf, "v") == 0 && iRet >= 256 )
-			return iRet;
+	if( iRet < 0 || 
+		(strcmp( buf, "v" ) == 0 && iRet >= 256 )	//VER判定で256以上を使用しているため、判定から除外する
+	){
+		return iRet;
 	}
-
-	else if(iRet > 0 ){
+	
+	if( iRet > 0 ){
 		easel_ES920_GetErrorString(iRet,msg);
 		DbgPrint("%s\n", msg);
 	}
@@ -1615,7 +1614,7 @@ int RecvCommandAck(void)
 	@brief EASEL 920MHz  Module の Ack受信チェック関数
 	@return 成功:  0 , 失敗：それ以外
 **/
-/*
+
 int SendChkAckCmd(void)
 {
 	unsigned char res[8]={0};
@@ -1646,7 +1645,7 @@ int SendChkAckCmd(void)
 	//printf("<RecvCommandAck> Port %x, ret %d\n", param.SerialPort, iRet);
 	return iRet;
 }
-*/
+
 
 /**
 	@~English

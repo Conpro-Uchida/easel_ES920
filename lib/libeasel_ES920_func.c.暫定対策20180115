@@ -45,25 +45,25 @@
 */
 /// @{
 
-#if 0
+#if 1
 #define DbgPrint(fmt...)	printf(fmt)
 #else
 #define DbgPrint(fmt...)	do { } while (0)
 #endif
 
-#if 0
+#if 1
 #define DbgAllocFreeCheck(fmt...)	printf(fmt)
 #else
 #define DbgAllocFreeCheck(fmt...)	do { } while (0)
 #endif
 
-#if 0
+#if 1
 #define DbgDataLength(fmt...)	printf(fmt)
 #else
 #define DbgDataLength(fmt...)	do { } while (0)
 #endif
 
-#if 0
+#if 1
 #define DbgPrintRecvTelegram(fmt...)	printf(fmt)
 #else
 #define DbgPrintRecvTelegram(fmt...)	do { } while (0)
@@ -94,22 +94,22 @@ int _easel_es920_Str2Num(unsigned char *str, int mal){
 
 	unsigned int num = 0;
 	unsigned int i;
-	unsigned int length = sizeof( str ) / sizeof( str[0] );
+	unsigned int length = sizeof(str) / sizeof(str[0]);
 	int dBm;
 
-	for( i = 0; i < length ; i ++ ){
-		if( str[i] <= '9' && str[i] >='0' ){
+	for(i = 0; i < length ; i ++){
+		if(str[i] <= '9' && str[i] >='0'){
 			dBm = dBm * mal + str[i] - '0';
 		}
-		else if( str[i] <= 'F' && str[i] >='A' ){
+		else if(str[i] <= 'F' && str[i] >='A'){
 			dBm = dBm * mal + str[i] -'A' + 10;
 		}
-		else if( str[i] <= 'f' && str[i] >='a' ){
+		else if(str[i] <= 'f' && str[i] >='a'){
 			dBm = dBm * mal + str[i] -'a' + 10;
 		}
 	}
 
-	if( str[0] == '-' )	dBm *= ( -1 );
+	if(str[0] == '-')	dBm *= (-1);
 
 	return dBm;
 }
@@ -135,15 +135,15 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	unsigned int length;
 	int p_num = num;
 
-	if( num < 0 ){
+	if(num < 0){
 		isSign = 1;
 		str[0]='-';
 		num *= (-1);
 	}
 
-	length = ( num / mal ) + 1;
+	length = (num / mal) + 1;
 
-	for( i = isSign ; i < length + isSign ; i++ ){
+	for(i = isSign ; i < length + isSign ; i++){
 
 		str[i] = num / pow(mal, length - i - 1 + isSign);
 		num -= str[i] * pow(mal, length - i - 1 + isSign);
@@ -154,14 +154,14 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 			str[i] = str[i] + '0';
 		  break;
 		case 16:
-		 	if( str[i] < 10 )
+		 	if(str[i] < 10)
 		 		str[i] = str[i] + '0';
-		 	else if( str[i] < 16 )
-		 		str[i] = ( str[i] - 10 ) + 'A';
+		 	else if(str[i] < 16)
+		 		str[i] = (str[i] - 10) + 'A';
 		    break;
 		}
 	}
-	DbgPrint("Num2Str %x = %s \r\n", p_num, str );
+	DbgPrint("Num2Str %x = %s \r\n", p_num, str);
 }
 
 /**
@@ -174,7 +174,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param str_pwr : 文字列
 	@return 成功:  数値
 **/
-#define _easel_es920_StrDec2Num( str )	_easel_es920_Str2Num( str , 10 )
+#define _easel_es920_StrDec2Num(str)	_easel_es920_Str2Num(str , 10)
 
 /**
 	@~English
@@ -186,7 +186,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param str : 文字列
 	@return 成功:  値
 **/
-#define _easel_es920_StrHex2Num( str )	_easel_es920_Str2Num( str , 16 )
+#define _easel_es920_StrHex2Num(str)	_easel_es920_Str2Num(str , 16)
 
 /**
 	@~English
@@ -198,7 +198,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param str_pwr : 文字列
 	@return 成功: 値
 **/
-#define _easel_es920_StrBin2Num( str )	_easel_es920_Str2Num( str , 2 )
+#define _easel_es920_StrBin2Num(str)	_easel_es920_Str2Num(str , 2)
 
 /**
 	@~English
@@ -210,7 +210,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param num : 数値
 	@param str : 文字列
 **/
-#define _easel_es920_Num2StrDec( num, str )	_easel_es920_Num2Str( num, str, 10 )
+#define _easel_es920_Num2StrDec(num, str)	_easel_es920_Num2Str(num, str, 10)
 
 /**
 	@~English
@@ -222,7 +222,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param num : 値
 	@param str : 文字列
 **/
-#define _easel_es920_Num2StrHex( num, str )	_easel_es920_Num2Str( num, str, 16 )
+#define _easel_es920_Num2StrHex(num, str)	_easel_es920_Num2Str(num, str, 16)
 
 /**
 	@~English
@@ -235,7 +235,7 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param num : 値
 	@param str : 文字列
 **/
-#define _easel_es920_Num2StrBin( num, str )	_easel_es920_Num2Str( num, str, 2 )
+#define _easel_es920_Num2StrBin(num, str)	_easel_es920_Num2Str(num, str, 2)
 
 /**
 	@~English
@@ -249,24 +249,24 @@ void _easel_es920_Num2Str(int num ,unsigned char str[], int mal){
 	@param ascStr : アスキーコード文字列データ
 	@return 成功:  0 失敗 :  エラー: -1
 **/
-long easel_ES920_bin2asc( unsigned char binStr[] , unsigned char ascStr[])
+long easel_ES920_bin2asc(unsigned char binStr[] , unsigned char ascStr[])
 {
 	unsigned int ascLen = 0, binLen = 0;
 	unsigned int n = 0, m = 0;
 
-	if( ascStr !=(unsigned char *)NULL ){
-		ascLen = ( sizeof(ascStr) / sizeof(ascStr[0]) );
+	if(ascStr !=(unsigned char *)NULL){
+		ascLen = (sizeof(ascStr) / sizeof(ascStr[0]));
 	}
 
-	if( binStr !=(unsigned char *)NULL ){
-		binLen = ( sizeof(binStr) / sizeof(binStr[0]) );
+	if(binStr !=(unsigned char *)NULL){
+		binLen = (sizeof(binStr) / sizeof(binStr[0]));
 	}
 
 	// バイナリ文字の2倍  送受信用文字列が用意されていなかったら Error
-	if( ascLen < binLen * 2 )
+	if(ascLen < binLen * 2)
 		return -1;
 
-	while ( n < binLen && m < ascLen ){
+	while (n < binLen && m < ascLen){
 
 		// バイナリ文字1文字に対して ascii 2byte消費
 		// 'A'(0x41) -> ascStr[m] = '1', ascStr[m + 1] = '4'
@@ -291,30 +291,30 @@ long easel_ES920_bin2asc( unsigned char binStr[] , unsigned char ascStr[])
 	@param binStr : バイナリ文字列データ
 	@return 成功:  0 失敗 :  エラー: -1
 **/
-long easel_ES920_asc2bin( unsigned char ascStr[] , unsigned char binStr[])
+long easel_ES920_asc2bin(unsigned char ascStr[] , unsigned char binStr[])
 {
 	unsigned int ascLen = 0, binLen = 0;
 	unsigned int n = 0, m = 0;
 
-	if( ascStr !=(unsigned char *)NULL ){
-		ascLen = ( sizeof(ascStr) / sizeof( ascStr[0] ) );
+	if(ascStr !=(unsigned char *)NULL){
+		ascLen = (sizeof(ascStr) / sizeof(ascStr[0]));
 	}
 
-	if( binStr !=(unsigned char *)NULL ){
-		binLen = ( sizeof(binStr) / sizeof( binStr[0] ) );
+	if(binStr !=(unsigned char *)NULL){
+		binLen = (sizeof(binStr) / sizeof(binStr[0]));
 	}
 
 	// バイナリ文字の2倍  用意されていなかったら Error
-	if( ascLen < binLen * 2 )
+	if(ascLen < binLen * 2)
 		return 1;
 
-	while ( n < ascLen && m < binLen ){
+	while (n < ascLen && m < binLen){
 
 		// bin文字2文字に対して 1キャラクタ消費
 		// 'A'(0x41) <- binStr[m] = '1', binStr[m + 1] = '4'
 		// ' '(0x20) <- binStr[m] = '0', binStr[m + 1] = '2'
 
-		binStr[n] = ( ascStr[m + 1] - 0x30 ) * 16 + ( ascStr[m] - 0x30 );
+		binStr[n] = (ascStr[m + 1] - 0x30) * 16 + (ascStr[m] - 0x30);
 		m += 2;
 		n += 1;
 	}
@@ -336,7 +336,6 @@ unsigned int _easel_es920_Hex2dBm(char *str_pwr){
 	unsigned int dBm;
 
 	sscanf(str_pwr,"%x",&dBm);
-	//prietf("rx_pwr: %x, %d ",dBm,dBm);
 
 	dBm = ~dBm;
 	dBm = dBm + 0x0001;
@@ -411,25 +410,20 @@ void easel_ES920_GetErrorString(int iRet,char *msg)
 	@param command : CMM920 コマンド
 	@return 成功:  0 失敗 :  0以外
 **/
-int _easel_es920_send_recv(char buf[], int command )
+int _easel_es920_send_recv(char buf[], int command)
 {
 	int iRet;
 	char msg[128]={0};
 	 
 	iRet = SendCommand(buf,command);
-	if( iRet < 0 )	return iRet;
+	if(iRet < 0)	return iRet;
 
 	usleep(param.SerialWait);
 
 	iRet = RecvCommandAck();
-	if( iRet < 0 )	return iRet;
+	if(iRet < 0)	return iRet;
 
-	if( buf != (char*) NULL ){
-		if( strcmp( buf, "v") == 0 && iRet >= 256 )
-			return iRet;
-	}
-
-	else if(iRet > 0 ){
+	else if(iRet > 0){
 		easel_ES920_GetErrorString(iRet,msg);
 		DbgPrint("%s\n", msg);
 	}
@@ -454,21 +448,21 @@ int _easel_es920_send_recv(char buf[], int command )
 	@param value : 保存するパラメータ
 	@return 成功:  0 失敗 :  0以外
 **/
-int _easel_es920_set_parameter( char buf[], int command , int size, void *value ){
+int _easel_es920_set_parameter(char buf[], int command , int size, void *value){
 
 	int iRet  = 0;
 	int *iValue;
 	long *lValue;
 
-	iRet = _easel_es920_send_recv( buf, command );
+	iRet = _easel_es920_send_recv(buf, command);
 
-	if( iRet == 0 ){
-		if( value != NULL ){
-			if( size == 2 ){
+	if(iRet == 0){
+		if(value != NULL){
+			if(size == 2){
 				iValue = (int *)value;
 				*iValue = command;
 			}
-			else if( size == 4 ){
+			else if(size == 4){
 				lValue = (long *)value;
 				*lValue = command;
 			}
@@ -492,8 +486,8 @@ int _easel_es920_set_parameter( char buf[], int command , int size, void *value 
 	@param value : 保存するパラメータ
 	@return 成功:  0 失敗 :  0以外
 **/
-#define _easel_es920_set_parameter_int( buf,command ,value )	\
-	_easel_es920_set_parameter( buf, command, 2, value )
+#define _easel_es920_set_parameter_int(buf,command ,value)	\
+	_easel_es920_set_parameter(buf, command, 2, value)
 
 /**
 	@~English
@@ -509,66 +503,66 @@ int _easel_es920_set_parameter( char buf[], int command , int size, void *value 
 	@param value : 保存するパラメータ
 	@return 成功:  0 失敗 :  0以外
 **/
-#define _easel_es920_set_parameter_long( buf,command ,value )	\
-	_easel_es920_set_parameter( buf, command, 4, value )
+#define _easel_es920_set_parameter_long(buf,command ,value)	\
+	_easel_es920_set_parameter(buf, command, 4, value)
 
 
 /**
 	@~English
 	@brief EASEL 920 Module set initialize mode
-	@param command : Command ( Terminal or Processor )
+	@param command : Command (Terminal or Processor)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの起動モードを設定する関数
 	@param command : ES920 コマンド (ターミナルかプロセッサモード)
 	@return 成功:  0 失敗 :  0以外
 **/
-int easel_ES920_set_mode_config( int command ){
-	return _easel_es920_set_parameter_int( NULL, command, NULL );
+int easel_ES920_set_mode_config(int command){
+	return _easel_es920_set_parameter_int(NULL, command, NULL);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set node type
-	@param command : Command ( EndDevice or Coordinator )
+	@param command : Command (EndDevice or Coordinator)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのノードタイプを設定する関数
 	@param command : ES920 コマンド (エンドデバイスか コーディネーター)
 	@return 成功:  0 失敗 :  0以外
 **/
-int easel_ES920_set_node( int command ){
-	return _easel_es920_set_parameter_int( "node", command, &param.node );
+int easel_ES920_set_node(int command){
+	return _easel_es920_set_parameter_int("node", command, &param.node);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set bandwidth
-	@param command : Command ( from 31.25kHz to 500 kHz )
+	@param command : Command (from 31.25kHz to 500 kHz)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのバンド幅を設定する関数
-	@param command : ES920 コマンド (31.25kHz  ~ 500kHz )
+	@param command : ES920 コマンド (31.25kHz  ~ 500kHz)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_bw(int command)
 {
-	return _easel_es920_set_parameter_int( "bw", command, &param.bw );
+	return _easel_es920_set_parameter_int("bw", command, &param.bw);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Spreading Factor
-	@param command : Command ( from 7 to 12 )
+	@param command : Command (from 7 to 12)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの拡散率を設定する関数
-	@param command : ES920 コマンド  ( 7- 12)
+	@param command : ES920 コマンド  (7- 12)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_sf(int command)
 {
-	return _easel_es920_set_parameter_int( "sf", command, &param.sf );
+	return _easel_es920_set_parameter_int("sf", command, &param.sf);
 }
 
 /**
@@ -585,7 +579,7 @@ int easel_ES920_set_ch(int command)
 {
 	int max_ch;
 
-	switch( param.bw ){
+	switch(param.bw){
 		case EASEL_ES920_BANDWIDTH_31250:
 		case EASEL_ES920_BANDWIDTH_41700:
 		case EASEL_ES920_BANDWIDTH_62500:
@@ -600,208 +594,208 @@ int easel_ES920_set_ch(int command)
 			break;
 	}
 
-	if( command < 1 && max_ch < command ){
+	if(command < 1 && max_ch < command){
 		DbgPrint("Invalid Value of ch");
 		return -1;
 	}
 
-	return _easel_es920_set_parameter_int( "channel", command, &param.ch );
+	return _easel_es920_set_parameter_int("channel", command, &param.ch);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set PAN ID
-	@param command : Command (From 1 to FFFE [Hex] )
+	@param command : Command (From 1 to FFFE [Hex])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのPAN IDを設定する関数
-	@param command : ES920 コマンド ( 1 ~ 65534 )
+	@param command : ES920 コマンド (1 ~ 65534)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_panid(int command)
 {
-	return _easel_es920_set_parameter_int( "panid", command, &param.panid );
+	return _easel_es920_set_parameter_int("panid", command, &param.panid);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Owner Address
-	@param command : Command (From 0 to FFFE [Hex] )
+	@param command : Command (From 0 to FFFE [Hex])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュール自身の Addressを設定する関数
-	@param command : ES920 コマンド ( 0 ~ 65534 )
+	@param command : ES920 コマンド (0 ~ 65534)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_ownid(int command)
 {
-	return _easel_es920_set_parameter_int( "ownid", command, &param.ownid );
+	return _easel_es920_set_parameter_int("ownid", command, &param.ownid);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Destination Address
-	@param command : Command (From 0 to FFFF [Hex] )
+	@param command : Command (From 0 to FFFF [Hex])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの 送信先Addressを設定する関数
-	@param command : ES920 コマンド ( 0 ~ 65535 )
+	@param command : ES920 コマンド (0 ~ 65535)
 	@note 送信モードがPayloadのときだけ有効 ?
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_dstid(int command)
 {
-	return _easel_es920_set_parameter_int( "dstid", command, &param.dstid );
+	return _easel_es920_set_parameter_int("dstid", command, &param.dstid);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Acknowledge Signal
-	@param command : Command ( 0 or 1 )
+	@param command : Command (0 or 1)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのACKを設定する関数
-	@param command : ES920 コマンド ( OFF or ON )
+	@param command : ES920 コマンド (OFF or ON)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_acksw(int command)
 {
-	return _easel_es920_set_parameter_int( "ack", command, &param.ack );
+	return _easel_es920_set_parameter_int("ack", command, &param.ack);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Acknowledge Retry Number
-	@param command : Command ( from 0 to 10 )
+	@param command : Command (from 0 to 10)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのリトライ回数を設定する関数
-	@param command : ES920 コマンド ( 0 ～ 10 )
+	@param command : ES920 コマンド (0 ～ 10)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_ackRetryNum(int command)
 {
-	return _easel_es920_set_parameter_int( "retry", command, &param.retry );
+	return _easel_es920_set_parameter_int("retry", command, &param.retry);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Transfer mode
-	@param command : Command ( Payload or Frame )
+	@param command : Command (Payload or Frame)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの送信モードを設定する関数
-	@param command : ES920 コマンド ( Payload or Frame )
+	@param command : ES920 コマンド (Payload or Frame)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_trmode(int command)
 {
-	return _easel_es920_set_parameter_int( "transmode", command, &param.transmod );
+	return _easel_es920_set_parameter_int("transmode", command, &param.transmod);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Receive Packet with adding id
-	@param command : Command ( OFF or ON )
+	@param command : Command (OFF or ON)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの受信パケットにID付加を設定する関数
-	@param command : ES920 コマンド ( OFF or ON )
+	@param command : ES920 コマンド (OFF or ON)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_rcvsw(int command)
 {
-	return _easel_es920_set_parameter_int( "rcvid", command, &param.rcvid );
+	return _easel_es920_set_parameter_int("rcvid", command, &param.rcvid);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set Receive Packet with adding RSSI
-	@param command : Command ( OFF or ON )
+	@param command : Command (OFF or ON)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの受信パケットにRSSI付加を設定する関数
-	@param command : ES920 コマンド ( OFF or ON )
+	@param command : ES920 コマンド (OFF or ON)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_rssisw(int command)
 {
-	return _easel_es920_set_parameter_int( "rssi", command, &param.rssi );
+	return _easel_es920_set_parameter_int("rssi", command, &param.rssi);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set booting mode
-	@param command : Command ( Configration or Operation )
+	@param command : Command (Configration or Operation)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの起動時のモードを設定する関数
-	@param command : ES920 コマンド ( Configration or Operation )
+	@param command : ES920 コマンド (Configration or Operation)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_opmode(int command)
 {
-	return _easel_es920_set_parameter_int( "operation", command, &param.mode );
+	return _easel_es920_set_parameter_int("operation", command, &param.mode);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set baudrate
-	@param command : Command ( from 1 to 6 [9600bps to 230400bps] )
+	@param command : Command (from 1 to 6 [9600bps to 230400bps])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのボーレートを設定する関数
-	@param command : ES920 コマンド ( 1～6  [9600bps ～ 230400bps]  )
+	@param command : ES920 コマンド (1～6  [9600bps ～ 230400bps] )
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_brate(int command)
 {
-	return _easel_es920_set_parameter_int( "baudrate", command, &param.baudrate );
+	return _easel_es920_set_parameter_int("baudrate", command, &param.baudrate);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set sleep mode
-	@param command : Command ( OFF or ON )
+	@param command : Command (OFF or ON)
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのスリープモードを設定する関数
-	@param command : ES920 コマンド (  OFF or ON )
+	@param command : ES920 コマンド ( OFF or ON)
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_slepsw(int command)
 {
-	return _easel_es920_set_parameter_int( "sleep", command, &param.sleep );
+	return _easel_es920_set_parameter_int("sleep", command, &param.sleep);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set sleep time
-	@param command : Command ( from 1 to 864000 [ x0.1sec  ] )
+	@param command : Command (from 1 to 864000 [ x0.1sec  ])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールのスリープ時間を設定する関数
-	@param command : ES920 コマンド (  1～864000 [ x0.1秒 ]  )
+	@param command : ES920 コマンド ( 1～864000 [ x0.1秒 ] )
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_slept(int command)
 {
-	return _easel_es920_set_parameter_long( "sleeptime", command, &param.sleeptime );
+	return _easel_es920_set_parameter_long("sleeptime", command, &param.sleeptime);
 }
 
 /**
 	@~English
 	@brief EASEL 920 Module set output power
-	@param command : Command ( from -4 to 13 [ dBm  ] )
+	@param command : Command (from -4 to 13 [ dBm  ])
 	@return Success : 0 , Failed : Otherwise 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールの出力を設定する関数
-	@param command : ES920 コマンド (  -4 ～13 [ dBm ]  )
+	@param command : ES920 コマンド ( -4 ～13 [ dBm ] )
 	@return 成功:  0 失敗 :  0以外
 **/
 int easel_ES920_set_outpw(int command)
 {
-	return _easel_es920_set_parameter_int( "power", command, &param.power );
+	return _easel_es920_set_parameter_int("power", command, &param.power);
 }
 
 
@@ -814,15 +808,14 @@ int easel_ES920_set_outpw(int command)
 	@return Success : 0 , Failed :
 	@~Japanese
 	@brief EASEL 920MHz  Module の バージョン読み込み 関数
-	@param command : ES920 コマンド (  -4 ～13 [ dBm ]  )
+	@param command : ES920 コマンド ( -4 ～13 [ dBm ] )
 	@param ver : モジュールのバージョン
 	@return 成功:  0 失敗 :
 **/
 
 int easel_es920_version(void)
 {
-	return _easel_es920_set_parameter_int( "v", 0, NULL );
-	//return _easel_es920_send_recv( "v", 0 );
+	return _easel_es920_set_parameter_int("v", 0, NULL);
 }
 
 /**
@@ -832,10 +825,10 @@ int easel_es920_version(void)
 	@return Success : 0
 	@~Japanese
 	@brief EASEL 920MHzモジュールとのシリアル送受信のウェイト時間を設定する関数
-	@param waitMsecTime : シリアル通信中のウェイト [ msec ]  )
+	@param waitMsecTime : シリアル通信中のウェイト [ msec ] )
 	@return 成功:  0
 **/
-int easel_ES920_set_serial_wait( int waitMsecTime )
+int easel_ES920_set_serial_wait(int waitMsecTime)
 {
 	param.SerialWait = waitMsecTime * 1000;
 	return 0;
@@ -882,10 +875,9 @@ int easel_ES920_init(char* PortName,int iBaudrate){
 	param.SerialWait = 50000;
 	param.app_comm_mode = EASEL_ES920_COMMUNICATION_ASCII;
 
-
 	// 内部 ReadThread 起動
-	if( param.read_id == 0 ){
-		//if( !pthread_create(&tid, NULL, RecvPollingThread,NULL) ){
+	if(param.read_id == 0){
+		//if(!pthread_create(&tid, NULL, RecvPollingThread,NULL)){
 		//	param.read_id = tid;
 		//}
 	}
@@ -907,12 +899,12 @@ int easel_ES920_init(char* PortName,int iBaudrate){
 	@param buf : 送信データ
 	@param value : 値
 **/
-void _easel_es920_add_frameheader( unsigned char buf[], int value ){
+void _easel_es920_add_frameheader(unsigned char buf[], int value){
 	int count;
 	int data;
-	for( count = 0; count < 4; count -- ){
-		data = (( value & (0xF << (8 * (3 - count) ))) >> (8 * (3 - count) ) );
-		_easel_es920_Num2StrHex( data, &buf[ count ] );
+	for(count = 0; count < 4; count --){
+		data = ((value & (0xF << (8 * (3 - count)))) >> (8 * (3 - count)));
+		_easel_es920_Num2StrHex(data, &buf[ count ]);
 	}
 }
 
@@ -926,7 +918,7 @@ void _easel_es920_add_frameheader( unsigned char buf[], int value ){
 	@param buf : 送信データバッファ
 	@return 成功:  0 失敗 :  エラー:  -1, -2
 **/
-int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr )
+int SendTeregram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr)
 {
 	unsigned char *send_buf;
 	int length, tx_length = 0, success_length = 0, address_offset = 0;
@@ -934,23 +926,24 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 	int trans_header_data = 0;
 	int count;
 	char ES920_PacketData[58];
+	int tmp_cnt = 0;
 
-	if( buf != (unsigned char*)NULL ){
+	if(buf != (unsigned char*)NULL){
 		tx_length = strlen((char *)buf);
 	}else{
 		return -1;
 	}
 
-	switch ( param.app_comm_mode ){
+	switch (param.app_comm_mode){
 	case EASEL_ES920_COMMUNICATION_BINARY:
 		tx_length = tx_length * 2;
-		send_buf = (unsigned char*)malloc(sizeof(unsigned char) * ( tx_length ) );
+		send_buf = (unsigned char*)malloc(sizeof(unsigned char) * (tx_length));
 		//ASCII -> バイナリ変換
-		easel_ES920_asc2bin( buf , send_buf );
+		easel_ES920_asc2bin(buf , send_buf);
 		break;
 
 	case EASEL_ES920_COMMUNICATION_ASCII:
-		send_buf = (unsigned char*)malloc(sizeof(unsigned char) * (tx_length ) );
+		send_buf = (unsigned char*)malloc(sizeof(unsigned char) * (tx_length));
 		// 文字列コピー
 		memcpy(send_buf, buf, sizeof(unsigned char) * tx_length);
 		break;
@@ -962,20 +955,20 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 	current_index = 1;
 
 	do {
-		if( current_index < total_index  ){
+		if(current_index < total_index ){
 			//length = 44;
 			length = 48;
 		}else{
 			length = (tx_length - count);
 		}
 
-		memset( ES920_PacketData, 0x00, 58 );
+		memset(ES920_PacketData, 0x00, 58);
 
 		// Frame タイプ送信の場合、送信先PAN ID(dst_id)と、送信先アドレス(dst_addr)を追加
-		if( param.transmod == EASEL_ES920_TRASMOD_FRAME ){
+		if(param.transmod == EASEL_ES920_TRASMOD_FRAME){
 			address_offset = 8;
-			_easel_es920_add_frameheader( &ES920_PacketData[0], dst_id);
-			_easel_es920_add_frameheader( &ES920_PacketData[4], dst_addr);
+			_easel_es920_add_frameheader(&ES920_PacketData[0], dst_id);
+			_easel_es920_add_frameheader(&ES920_PacketData[4], dst_addr);
 		}else{
 			//Payload タイプ送信の場合、アドレスを付加しないため offset = 0
 			address_offset = 0;
@@ -1005,23 +998,37 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 		ES920_PacketData[length + address_offset + 0] = '\r';
 		ES920_PacketData[length + address_offset + 1] = '\n';
 
-		//success_length = Serial_PutString(param.SerialPort, ES920_PacketData, ( (length + address_offset +  6)*sizeof(unsigned char) ) );
-		success_length = Serial_PutString(param.SerialPort, ES920_PacketData, ( (length + address_offset +  2)*sizeof(unsigned char) ) );
-
-		if( success_length == 0 ){
+		//success_length = Serial_PutString(param.SerialPort, ES920_PacketData, ((length + address_offset +  6)*sizeof(unsigned char)));
+		//success_length = Serial_PutString(param.SerialPort, ES920_PacketData, ((length + address_offset +  2)*sizeof(unsigned char)));
+		/*
+		if(success_length == 0){
 				free(send_buf);
 				return -2;
+		}else{
+			DbgPrint("==== SendTelegram =======================\n");	
+			DbgPrint("success_length = %d\n", success_length);
+		}		
+		*/
+		
+		for(tmp_cnt = 0; tmp_cnt < (length + address_offset + 2); tmp_cnt ++)
+		{
+			success_length = Serial_PutChar(param.SerialPort, (unsigned char)ES920_PacketData[tmp_cnt]);
+			usleep(100);
+			if( success_length == -1 ){
+				free(send_buf);
+				return -2;
+			}
 		}
 
 		count += length;
 		current_index += 1;
 
-	}while( count < tx_length );
+	}while(count < tx_length);
 
 	DbgPrint("==== SendTelegram =======================\n");
 	DbgPrint("Data\n");
-//	for( count = 0; count < tx_length; count++ ) DbgPrint("%02x ",send_buf[count]);
-	for( count = 0; count < (length + address_offset +  2); count++ ) DbgPrint("%02x ",ES920_PacketData[count]);
+//	for(count = 0; count < tx_length; count++) DbgPrint("%02x ",send_buf[count]);
+	for(count = 0; count < (length + address_offset +  2); count++) DbgPrint("%02x ",ES920_PacketData[count]);
 	DbgPrint("\n");
 	/*
 	gettimeofday(&myTime,NULL);
@@ -1031,7 +1038,7 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 				time_st->tm_min,
 				time_st->tm_sec,
 				myTime.tv_usec
-	      );
+	     );
 	*/
 
 	DbgPrint("<SendTelegram> Port %x, Data %s\n",param.SerialPort, buf);
@@ -1041,7 +1048,7 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 	return tx_length;
 }
 
-//#define SendTeregramPayload( buf )	SendTeregram( buf, NULL, NULL )
+//#define SendTeregramPayload(buf)	SendTeregram(buf, NULL, NULL)
 
 /**
 	@~English
@@ -1053,7 +1060,7 @@ int SendTelegram(unsigned char *buf, unsigned int dst_id, unsigned int dst_addr 
 	@param buf : 送信データバッファ
 	@return 成功:  0 失敗 :  エラー:  -1, -2
 **/
-int SendTelegramPayload(unsigned char *buf)
+int SendTeregramPayload(unsigned char *buf)
 {
 	#ifdef ES920LR_OLD1_PAYLOAD
 		int iRet=0;
@@ -1062,7 +1069,7 @@ int SendTelegramPayload(unsigned char *buf)
 		int count;
 
 		//make the format
-		for( count =0; count < 50; count++ ){
+		for(count =0; count < 50; count++){
 			Data[count] = buf[count];
 		}
 
@@ -1074,7 +1081,7 @@ int SendTelegramPayload(unsigned char *buf)
 
 		DbgPrint("==== SendTelegram =======================\n");
 		DbgPrint("Data\n");
-		for( count = 0; count < length; count++ ) DbgPrint("%02x ",Data[count]);
+		for(count = 0; count < length; count++) DbgPrint("%02x ",Data[count]);
 		DbgPrint("\n");
 		/*
 		gettimeofday(&myTime,NULL);
@@ -1084,7 +1091,7 @@ int SendTelegramPayload(unsigned char *buf)
 					time_st->tm_min,
 					time_st->tm_sec,
 					myTime.tv_usec
-		      );
+		     );
 		*/
 
 		DbgPrint("<SendTelegram> Port %x, ret %d, Data %s\n",param.SerialPort,iRet,Data);
@@ -1105,9 +1112,9 @@ int SendTelegramPayload(unsigned char *buf)
 	@param hex : 16進数
 	@return 成功:  10進数BCDコード
 **/
-BYTE _calc_Hex2Bcd( BYTE hex ){
+BYTE _calc_Hex2Bcd(BYTE hex){
 
-	return ( ( hex / 16 ) * 10 + ( hex % 16 ) );
+	return ((hex / 16) * 10 + (hex % 16));
 
 }
 
@@ -1138,25 +1145,25 @@ void *RecvPollingThread(void *arg)
 	PEASEL920_READBUFFER new_buffer;
 
 	//get the data length(header + response data)
-	memset(&str_pwr[0], 0x00, 4 );
-	memset(&str_id[0], 0x00, 4 );
-	memset(&str_addr[0], 0x00, 4 );
+	memset(&str_pwr[0], 0x00, 4);
+	memset(&str_id[0], 0x00, 4);
+	memset(&str_addr[0], 0x00, 4);
 
 	/* */
-	while( 1 ){
+	while(1){
 
 		// set header_length
-		if( param.rssi == EASEL_ES920_RSSI_ON ) header_length[0] = 4;
-		if( param.rcvid == EASEL_ES920_RCVID_ON ) header_length[1] = 8;
+		if(param.rssi == EASEL_ES920_RSSI_ON) header_length[0] = 4;
+		if(param.rcvid == EASEL_ES920_RCVID_ON) header_length[1] = 8;
 
-		Serial_Get_In_Buffer( param.SerialPort, &readlen );
+		Serial_Get_In_Buffer(param.SerialPort, &readlen);
 
-		if( readlen == 0 ) continue;
+		if(readlen == 0) continue;
 
 		for(count = 0;count < readlen;count++){
 			temp_char = Serial_GetChar(param.SerialPort);
 
-			switch( temp_char ){
+			switch(temp_char){
 			case '\r':
 				temp_recv_buf.state = 1;
 				break;
@@ -1168,7 +1175,7 @@ void *RecvPollingThread(void *arg)
 				break;
 			}
 
-			if( temp_recv_buf.length + count < 50 ){
+			if(temp_recv_buf.length + count < 50){
 				temp_recv_buf.data[temp_recv_buf.length + count] = Serial_GetChar(param.SerialPort);
 			}
 			else{
@@ -1177,7 +1184,7 @@ void *RecvPollingThread(void *arg)
 		}
 
 
-		if( temp_recv_buf.state == 2 ){
+		if(temp_recv_buf.state == 2){
 			DbgPrintRecvTelegram("===========RecvTele=======================\n");
 			DbgPrintRecvTelegram("Data\n");
 			for(count=0;count < temp_recv_buf.length;count++)
@@ -1191,7 +1198,7 @@ void *RecvPollingThread(void *arg)
 			time_st->tm_min,
 			time_st->tm_sec,
 			myTime.tv_usec
-      );
+     );
 	 */
 
 			if(!strcmp((char *)temp_recv_buf.data,"OK")) return;
@@ -1199,31 +1206,31 @@ void *RecvPollingThread(void *arg)
 			DbgPrintRecvTelegram("DATA:");
 
 
-			for( count = 0; count < header_length[0] + header_length[1]; count ++ ){
+			for(count = 0; count < header_length[0] + header_length[1]; count ++){
 
-				if( count < header_length[0] ){
+				if(count < header_length[0]){
 					//rx_pwr
 					str_pwr[count] = temp_recv_buf.data[count];
-				}else if( count < header_length[0] + 4 ){
+				}else if(count < header_length[0] + 4){
 					// id
 					str_id[count - header_length[0]] = temp_recv_buf.data[count];
-				}else if( count < header_length[0] + header_length[1] ){
+				}else if(count < header_length[0] + header_length[1]){
 					// addr
 					str_addr[count - header_length[0] - 4] = temp_recv_buf.data[count];
 				}
 			}
 
 			// ここで新しいバッファ作成
-			new_buffer = ( PEASEL920_READBUFFER ) malloc(sizeof(EASEL920_READBUFFER));
+			new_buffer = (PEASEL920_READBUFFER) malloc(sizeof(EASEL920_READBUFFER));
 
-			if( new_buffer != ( PEASEL920_READBUFFER )NULL ){
+			if(new_buffer != (PEASEL920_READBUFFER)NULL){
 				new_buffer->rssi = _easel_es920_StrHex2Num(str_pwr);
 				new_buffer->src_id = _easel_es920_StrHex2Num(str_id);
 				new_buffer->src_addr = _easel_es920_StrHex2Num(str_addr);
 
-				memset(&new_buffer->data[0], 0x00, 50 );
+				memset(&new_buffer->data[0], 0x00, 50);
 
-				for(count = 0; count < (temp_recv_buf.length - header_length[0] - header_length[1] ); count ++ ){
+				for(count = 0; count < (temp_recv_buf.length - header_length[0] - header_length[1]); count ++){
 					new_buffer->data[count] = temp_recv_buf.data[count];
 				}
 
@@ -1232,7 +1239,7 @@ void *RecvPollingThread(void *arg)
 
 				//表示
 				DbgPrintRecvTelegram("<RecvTelegram>Data %s buf %s rx_pwr %d src_id %d src_addr %d\n",
-					new_buffer->data,temp_recv_buf.data,new_buffer->rssi, new_buffer->src_id, new_buffer->src_addr );
+					new_buffer->data,temp_recv_buf.data,new_buffer->rssi, new_buffer->src_id, new_buffer->src_addr);
 			}
 		}
 		usleep(100 * 1000);
@@ -1252,11 +1259,10 @@ void *RecvPollingThread(void *arg)
 	@param buf : 受信データバッファ
 	@return 成功:  0 失敗 :  送信 エラー:  -1～-15 -16～-31,  受信エラー : -32～
 **/
-//int RecvTelegram(unsigned char *buf)
 int RecvTelegram(unsigned char *buf, short *rx_pwr, unsigned short *src_id, unsigned short *src_addr)
 {
 	int iRet = 0;
-	unsigned char Data[EASEL_ES920_RECV_MAX_SIZE];
+	unsigned char Data[62];
 	int readlen = 0;
 	int count;
 	int iTempLen = 0, bef_iTempLen = 0;
@@ -1266,106 +1272,164 @@ int RecvTelegram(unsigned char *buf, short *rx_pwr, unsigned short *src_id, unsi
 	int header_length[2] = {0};
 
 	//get the data length(header + response data)
-	memset(&Data[0], 0x00, EASEL_ES920_RECV_MAX_SIZE);
+	memset(&Data[0], 0x00, 62);
 	memset(&str_pwr[0], 0x00, 4);
 	memset(&str_id[0], 0x00, 4);
 	memset(&str_addr[0], 0x00, 4);
 
 	//set header_length
-	if( param.rssi == EASEL_ES920_RSSI_ON ) header_length[0] = 4;
-	if( param.rcvid == EASEL_ES920_RCVID_ON ) header_length[1] = 8;
+	if(param.rssi == EASEL_ES920_RSSI_ON) header_length[0] = 4;
+	if(param.rcvid == EASEL_ES920_RCVID_ON) header_length[1] = 8;
 
 	do{
 		bef_iTempLen=iTempLen;
 		iTempLen = 0;
 		usleep(100 * 1000);
-		Serial_Get_In_Buffer( param.SerialPort, &iTempLen );
-		//readlen += iTempLen;
+		Serial_Get_In_Buffer(param.SerialPort, &iTempLen);
+		readlen += iTempLen;
 //		DbgPrintRecvTelegram(" before : %d len %d\n", bef_iTempLen, iTempLen);
-	}while( iTempLen != bef_iTempLen );
+	}while(iTempLen != bef_iTempLen);
 
-	readlen = iTempLen;
+	//readlen = iTempLen;
 	
-	if( readlen == 0 ) return -1;
+	if(readlen == 0) return -1;
 
 	//debug code
 	printf("readlen = %d\n", readlen);
-	
-	if( readlen > EASEL_ES920_RECV_MAX_SIZE ) readlen = EASEL_ES920_RECV_MAX_SIZE;
-	//assert(datasize <= readlen);
-	
+
 	for(count=0;count < readlen;count++){
 		Data[count] = Serial_GetChar(param.SerialPort);
-		if( Data[count] == 0x0a ) break;
+		if(Data[count] == 0x0a) break;
 	}
-	
-	//if(strcmp(Data,str_ok)==0){
-	//	return -1;
-	//}
 	
 	DbgPrintRecvTelegram("===========RecvTele=======================\n");
 	DbgPrintRecvTelegram("Data\n");
 	for(count=0;count < readlen;count++){
 		DbgPrintRecvTelegram("%02x ",Data[count]);
-		if( Data[count] == 0x0a ) break;
+		if(Data[count] == 0x0a) break;
 	}
 	DbgPrintRecvTelegram("\n");
-
-	/*gettimeofday(&myTime,NULL);
-	time_st = localtime(&myTime.tv_sec);
-	printf("TIME:%02d:%02d:%02d.%06d\n",
-			time_st->tm_hour,
-			time_st->tm_min,
-			time_st->tm_sec,
-			myTime.tv_usec
-      );
-	 */
 
 	if(!strcmp((char *)Data,"OK\r\n")) return 0;
 
 	DbgPrintRecvTelegram("DATA:");
 
-	for( count = 0; count < readlen; count ++ ){
+	for(count = 0; count < readlen; count ++){
 
-		if( header_length[0] ){
-			if( count < header_length[0] ){
-				//rx_pwr
-				str_pwr[count] = Data[count];
-			}
-		}
-		
-		if( header_length[1] ){
-			if( count < header_length[0] + 4 ){
-				// id
-				str_id[count - header_length[0]] = Data[count];
-			}else if( count < header_length[0] + header_length[1] ){
-				// addr
-				str_addr[count - header_length[0] - 4] = Data[count];
-			}
-		}
-		
-		if( count >= (header_length[0] + header_length[1] ) ){
+		if(count < header_length[0]){
+			// rx_pwr
+			str_pwr[count] = Data[count];
+		}else if(count < header_length[0] + 4){
+			// id
+			str_id[count - header_length[0]] = Data[count];
+		}else if(count < header_length[0] + header_length[1]){
+			// addr
+			str_addr[count - header_length[0] - 4] = Data[count];
+		}else{
 			buf[count - header_length[0] - header_length[1] ] = Data[count];
 		}
 	}
 
-	if( rx_pwr != NULL )	*rx_pwr = _easel_es920_StrHex2Num(str_pwr);
-	if( src_id != NULL )	*src_id = _easel_es920_StrHex2Num(str_id);
-	if( src_addr != NULL )	*src_addr = _easel_es920_StrHex2Num(str_addr);
+	if(rx_pwr != NULL)	*rx_pwr = _easel_es920_StrHex2Num(str_pwr);
+	if(src_id != NULL)	*src_id = _easel_es920_StrHex2Num(str_id);
+	if(src_addr != NULL)	*src_addr = _easel_es920_StrHex2Num(str_addr);
 
-	DbgPrintRecvTelegram("<RecvTelegram>Data %s buf %s",Data , buf);
-
-	if( rx_pwr != NULL )	DbgPrintRecvTelegram("rx_pwr %d ", *rx_pwr);
-	if( src_id != NULL )	DbgPrintRecvTelegram("src_id %d ", *src_id);
-	if( src_addr != NULL )	DbgPrintRecvTelegram("src_addr %d", *src_addr);
-	
-	DbgPrintRecvTelegram("\n");
-
+	DbgPrintRecvTelegram("<RecvTelegram>Data %s buf %s rx_pwr %d src_id %d src_addr %d\n",
+			Data,buf,*rx_pwr, *src_id, *src_addr);
 
 	return readlen;
 }
 
-//#define RecvTelegramPayload( buf )	RecvTelegram( buf, NULL, NULL, NULL )
+/**
+	@~English
+	@brief EASEL 920MHz Module data receive function
+	@param buf : receive data buffer
+	@return Success : 0 , Failed : From -1 to -15 : Parameter Error, From -16 to -31 Send Error, less than -32 : Receive Error
+	@~Japanese
+	@brief EASEL 920MHz  Module のデータ受信 関数
+	@param buf : 受信データバッファ
+	@return 成功:  0 失敗 :  送信 エラー:  -1～-15 -16～-31,  受信エラー : -32～
+**/
+int RecvTelegramOld(unsigned char *buf, short *rx_pwr, unsigned short *src_id, unsigned short *src_addr)
+{
+	int iRet = 0;
+	unsigned char Data[62];
+	int readlen = 0;
+	int count;
+	int iTempLen = 0, bef_iTempLen = 0;
+	unsigned char str_pwr[4] = {0};
+	unsigned char str_id[4] = {0};
+	unsigned char str_addr[4] = {0};
+	int header_length[2] = {0};
+
+	//get the data length(header + response data)
+	memset(&Data[0], 0x00, 62);
+	memset(&str_pwr[0], 0x00, 4);
+	memset(&str_id[0], 0x00, 4);
+	memset(&str_addr[0], 0x00, 4);
+
+	//set header_length
+	if(param.rssi == EASEL_ES920_RSSI_ON) header_length[0] = 4;
+	if(param.rcvid == EASEL_ES920_RCVID_ON) header_length[1] = 8;
+
+	do{
+		bef_iTempLen=iTempLen;
+		iTempLen = 0;
+		usleep(100 * 1000);
+		Serial_Get_In_Buffer(param.SerialPort, &iTempLen);
+//		DbgPrintRecvTelegram(" before : %d len %d\n", bef_iTempLen, iTempLen);
+	}while(iTempLen != bef_iTempLen);
+
+	readlen = iTempLen;
+	
+	if(readlen == 0) return -1;
+
+	//debug code
+	printf("readlen = %d\n", readlen);
+
+	for(count=0;count < readlen;count++){
+		Data[count] = Serial_GetChar(param.SerialPort);
+	}
+	
+	DbgPrintRecvTelegram("===========RecvTele=======================\n");
+	DbgPrintRecvTelegram("Data\n");
+	for(count=0;count < readlen;count++){
+		DbgPrintRecvTelegram("%02x ",Data[count]);
+	}
+
+	DbgPrintRecvTelegram("\n");
+
+	if(!strcmp((char *)Data,"OK\r\n")) return 0;
+
+	DbgPrintRecvTelegram("DATA:");
+
+	for(count = 0; count < readlen; count ++){
+
+		if(count < header_length[0]){
+			// rx_pwr
+			str_pwr[count] = Data[count];
+		}else if(count < header_length[0] + 4){
+			// id
+			str_id[count - header_length[0]] = Data[count];
+		}else if(count < header_length[0] + header_length[1]){
+			// addr
+			str_addr[count - header_length[0] - 4] = Data[count];
+		}else{
+			buf[count - header_length[0] - header_length[1] ] = Data[count];
+		}
+	}
+
+	if(rx_pwr != NULL)	*rx_pwr = _easel_es920_StrHex2Num(str_pwr);
+	if(src_id != NULL)	*src_id = _easel_es920_StrHex2Num(str_id);
+	if(src_addr != NULL)	*src_addr = _easel_es920_StrHex2Num(str_addr);
+
+	DbgPrintRecvTelegram("<RecvTelegram>Data %s buf %s rx_pwr %d src_id %d src_addr %d\n",
+			Data,buf,*rx_pwr, *src_id, *src_addr);
+
+	return readlen;
+}
+
+//#define RecvTelegramPayload(buf)	RecvTelegram(buf, NULL, NULL, NULL)
 
 /**
 	@~English
@@ -1391,7 +1455,7 @@ int RecvTelegramPayload(unsigned char *buf)
 		//get the data length(header + response data)
 		memset(&Data[0],0x00, 62);
 
-		ioctl( param.SerialPort, FIONREAD, &readlen );
+		ioctl(param.SerialPort, FIONREAD, &readlen);
 		if(readlen == 0)
 		{
 			DbgPrintRecvTelegram("NO Data Received\n");
@@ -1424,7 +1488,7 @@ int RecvTelegramPayload(unsigned char *buf)
 					time_st->tm_min,
 					time_st->tm_sec,
 					myTime.tv_usec
-		      );
+		     );
 		*/
 
 		//Serial_GetChar(param.SerialPort);
@@ -1434,22 +1498,22 @@ int RecvTelegramPayload(unsigned char *buf)
 		//for(i=0;i<=readlen ;i++) ;
 
 	/*
-		if( readlen >= 2 ){
-			if( Data[readlen - 2] == '\r' &&
-				Data[readlen -1] == '\n' ){
+		if(readlen >= 2){
+			if(Data[readlen - 2] == '\r' &&
+				Data[readlen -1] == '\n'){
 					memset(&buf[readlen-2],'\0', 2);
 			}
 		}
 	*/
 
-		for( count = 0; count < readlen; count ++ ){
+		for(count = 0; count < readlen; count ++){
 
-			if( count < 4 ){
+			if(count < 4){
 				//rx_pwr
 				str_pwr[count] = Data[count];
-			}else if( count < 8 ){
+			}else if(count < 8){
 				// id
-			}else if( count < 12){
+			}else if(count < 12){
 				// addr
 			}else{
 				buf[count-12] = Data[count];
@@ -1459,7 +1523,7 @@ int RecvTelegramPayload(unsigned char *buf)
 		//tmp_pwr = atoi(rx_pwr);
 		//sscanf(str_pwr,"%x",&rx_pwr);
 
-		//memcpy(buf, buf, (readlen-13) * sizeof(unsigned char) );
+		//memcpy(buf, buf, (readlen-13) * sizeof(unsigned char));
 
 
 		//printf("\n");
@@ -1494,13 +1558,13 @@ int RecvTelegramPayload(unsigned char *buf)
 	@param command : コマンド
 	@return 成功:  0 失敗 :   -1
 **/
-int SendCommand(unsigned char buf[], int command )
+int SendCommand(unsigned char buf[], int command)
 {
 	int iRet=0;
 	unsigned char *Data;
 	int length;
 
-	if( buf != NULL ){
+	if(buf != NULL){
 //		length = sizeof(buf) / sizeof((buf)[0]) + 4;
 		length = strlen((char *)buf) + 5; //(space,number,\r ,\n, \0) 5 words
 	}else{
@@ -1508,16 +1572,16 @@ int SendCommand(unsigned char buf[], int command )
 	}
 	DbgPrint("send SIZE %d.\r\n", length);
 	//make the format	
-	Data = (unsigned char *)malloc( sizeof(unsigned char) * length );
+	Data = (unsigned char *)malloc(sizeof(unsigned char) * length);
 
-	if( Data == (unsigned char*) NULL ) return -1;
+	if(Data == (unsigned char*) NULL) return -1;
 
-	if( buf == NULL ){
+	if(buf == NULL){
 		DbgPrint("--- Processoer Mode ----\n");
 		sprintf((char *)Data,"%d\r\n",command);
 	}
 	else{
-		switch( buf[0] ){
+		switch(buf[0]){
 			case 'v':
 				sprintf((char *)Data,"%s\r\n",buf);
 				DbgPrint("version check\n");
@@ -1535,12 +1599,12 @@ int SendCommand(unsigned char buf[], int command )
 		}
 	}
 
-	length = strlen((char *)Data );
+	length = strlen((char *)Data);
 
 	DbgPrint("<SendCommand> Len : %d\n",length);
 	DbgPrint("<SendCommand> Data : %s\n",Data);
 
-	if(length != Serial_PutString(param.SerialPort, Data, length ))
+	if(length != Serial_PutString(param.SerialPort, Data, length))
 		iRet=-1;
 
 	DbgPrint("<SendCommand> Port %x, buf %s, command %d, ret %d\n",param.SerialPort, buf, command,iRet);
@@ -1573,34 +1637,21 @@ int RecvCommandAck(void)
 	}
 
 	//divide response  
-	//if( res[0] == 255 ){
-		usleep( param.SerialWait );
+	//if(res[0] == 255){
+		usleep(param.SerialWait);
 		// received error
 	//	DbgPrint("Received Error.\r\n");
 	//	iRet = -1;
 	//}
-	//if( memcmp( &res[0], "VER" , 3 ) == 0 ){
-	//		// get version code
-	//		printf("ES920LR %s\n",res);
-	//}
-
-	if( memcmp( &res[0], "OK" , 2 ) == 0 ){
-		iRet = 0;
+	if(memcmp(&res[0], "VER" , 3) == 0){
+			// get version code
+			printf("ES920LR %s\n",res);
 	}
-	else if( memcmp( &res[0], "NG" , 2 ) == 0 ){
+	else if(memcmp(&res[0], "NG" , 2) == 0){
 		// get error code
-		for( cnt = 0; cnt < 3; cnt ++ ){
-			iRet += ( res[cnt + 3] - 0x30) * pow(10.0, (2 - cnt) );
-		} //必ず数字は3桁 ( NG 001とか)
-	}
-	else if( memcmp( &res[0], "VER" , 3 ) == 0 ){
-		// get version code
-		printf("ES920LR %s\n",res);
-		
-		// Versionは Major * 256 + Minorで返却する。( >= 256 )
-		iRet = (res[4] - 0x30) * 256;
-//		iRet += _easel_es920_StrHex2Num(&res[6]);
-
+		for(cnt = 0; cnt < 3; cnt ++){
+			iRet += (res[cnt + 3] - 0x30) * pow(10.0, (2 - cnt));
+		} //必ず数字は3桁 (NG 001とか)
 	}
 
 	DbgPrint("<RecvCommandAck> Port %x, res %s, ret %d\n",param.SerialPort,res,iRet);
@@ -1615,7 +1666,6 @@ int RecvCommandAck(void)
 	@brief EASEL 920MHz  Module の Ack受信チェック関数
 	@return 成功:  0 , 失敗：それ以外
 **/
-/*
 int SendChkAckCmd(void)
 {
 	unsigned char res[8]={0};
@@ -1628,25 +1678,27 @@ int SendChkAckCmd(void)
 		res[cnt] = Serial_GetChar(param.SerialPort);
 	}
 
-	usleep( param.SerialWait );
+	usleep(param.SerialWait);
+	//usleep((700 * 1000));
 	//printf("sleep time = %d", param.SerialWait);
 	//10ミリ秒のウェイト
 
-	if( memcmp( &res[0], "OK" , 2 ) == 0 ){
+	if(memcmp(&res[0], "OK" , 2) == 0){
 		iRet = 0;
 	}
-	else if( memcmp( &res[0], "NG" , 2 ) == 0 ){
+	else if(memcmp(&res[0], "NG" , 2) == 0){
 		// get error code
-		for( cnt = 0; cnt < 3; cnt ++ ){
-			iRet += ( res[cnt + 3] - 0x30) * pow(10.0, (2 - cnt) );
-		} //必ず数字は3桁 ( NG 001とか)
+		for(cnt = 0; cnt < 3; cnt ++){
+			iRet += (res[cnt + 3] - 0x30) * pow(10.0, (2 - cnt));
+		} //必ず数字は3桁 (NG 001とか)
+	}else{
+		
 	}
 
 	//DbgPrint("<RecvCommandAck> Port %x, res %s, ret %d\n",param.SerialPort,res,iRet);
 	//printf("<RecvCommandAck> Port %x, ret %d\n", param.SerialPort, iRet);
 	return iRet;
 }
-*/
 
 /**
 	@~English
@@ -1663,7 +1715,7 @@ int easel_ES920_exit(void)
 	Serial_PortClose(param.SerialPort);
 
 	// 内部 ReadThread 強制切離し
-	if( param.read_id != 0 ){
+	if(param.read_id != 0){
 		pthread_detach(param.read_id);
 	}
 
@@ -1673,18 +1725,18 @@ int easel_ES920_exit(void)
 int SerialPortSendBufferClear(void)
 {
 	//送信バッファのクリアを使用する。
-	tcflush( param.SerialPort, TCOFLUSH );
+	tcflush(param.SerialPort, TCOFLUSH);
 }
 
 int SerialPortRecvBufferClear(void)
 {
 	//受信バッファのクリアを使用する。
-	tcflush( param.SerialPort, TCIFLUSH );
+	tcflush(param.SerialPort, TCIFLUSH);
 }
 
 int SerialPortAllBufferClear(void)
 {
 	//送受信バッファのクリアを使用する。
-	tcflush( param.SerialPort, TCIOFLUSH );
+	tcflush(param.SerialPort, TCIOFLUSH);
 }
 
